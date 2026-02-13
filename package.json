@@ -6,7 +6,7 @@
     "start": "node ./dist/bin/www.js",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "nodemon --exec ts-node ./bin/www.ts --watch . --ext ts,js,json --ignore client/ --ignore node_modules/ --ignore dist/",
-    "dev:client": "chokidar \"client/src/**/*\" -c \"cd client && npm run build && echo 'Client rebuilt to dist/client/'\"",
+    "dev:client": "chokidar \"client/src/**/*\" -c \"cd client && CI= npm run build && echo 'Client rebuilt to dist/client/'\"",
     "build": "tsc",
     "clean": "rm -rf dist",
     "build:client": "cd client && npm run build",

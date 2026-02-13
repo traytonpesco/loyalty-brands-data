@@ -2,6 +2,13 @@
 
 ## 🚀 Get Started in 5 Minutes
 
+### Step 0: Environment
+
+```bash
+cp .env.example .env
+# Edit .env if needed (JWT_SECRET, DATABASE_URL for Postgres, etc.)
+```
+
 ### Step 1: Install Dependencies
 
 ```bash
@@ -29,6 +36,12 @@ npm run db:migrate
 # Seed database (creates demo data)
 npm run db:seed
 ```
+
+**If full seed fails** (e.g. RBAC validation errors), run only the engagement seeder:
+```bash
+npx sequelize-cli db:seed --seed 20260213130000-seed-engagement-data.js
+```
+Note: You may need to run the RBAC/multi-tenancy seeders first if tables are empty. Full seed fix is TBD.
 
 ### Step 3: Start Application
 

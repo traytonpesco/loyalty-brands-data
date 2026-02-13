@@ -143,7 +143,7 @@ function AdminLanding({
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('overview');
-  const { selectedTenant, availableTenants, setAvailableTenants, setSelectedTenant, setIsSuperAdmin } = useTenant();
+  const { selectedTenant, availableTenants, setAvailableTenants, setSelectedTenant, isSuperAdmin, setIsSuperAdmin } = useTenant();
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingTenants, setIsLoadingTenants] = useState(false);

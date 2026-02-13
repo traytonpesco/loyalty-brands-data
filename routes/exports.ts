@@ -167,7 +167,6 @@ router.post('/campaigns', requirePermission(['campaigns.read']), async (req, res
 
     const { CampaignSession, CampaignImpression, CampaignContact } = models as any;
     const seq = (models as any).sequelize;
-    const campaignIds = campaigns.map((c: any) => c.id);
 
     const buildRow = async (c: any) => {
       const cid = c.id;
