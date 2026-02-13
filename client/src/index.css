@@ -1,0 +1,449 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Headings';
+  src: url('./fonts/headings.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Body';
+  src: url('./fonts/body.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 15%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 35%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+
+    /* ASDA Green as primary */
+    --primary: 88 70% 43%;
+    --primary-foreground: 0 0% 100%;
+
+    /* ASDA Dark Green as secondary */
+    --secondary: 150 100% 20%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 88 70% 43%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --ring: 88 70% 43%;
+    --radius: 0.5rem;
+    
+    /* Chart colors optimized for light mode */
+    --chart-1: 88 70% 43%;
+    --chart-2: 150 100% 25%;
+    --chart-3: 200 70% 50%;
+    --chart-4: 280 70% 50%;
+    --chart-5: 40 70% 50%;
+    
+    /* Focus visible styles */
+    --focus-ring: 88 70% 43%;
+  }
+
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 95%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+
+    /* ASDA Green adjusted for dark mode - higher contrast */
+    --primary: 88 60% 55%;
+    --primary-foreground: 0 0% 10%;
+
+    --secondary: 150 50% 35%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 88 60% 55%;
+    --accent-foreground: 0 0% 10%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --ring: 88 60% 55%;
+    --radius: 0.5rem;
+    
+    /* Chart colors optimized for dark mode */
+    --chart-1: 88 60% 55%;
+    --chart-2: 150 50% 40%;
+    --chart-3: 200 70% 60%;
+    --chart-4: 280 70% 60%;
+    --chart-5: 40 80% 60%;
+    
+    /* Focus visible styles */
+    --focus-ring: 88 60% 55%;
+  }
+  
+  /* Smooth theme transitions */
+  * {
+    transition: background-color 0.2s ease-in-out, 
+                border-color 0.2s ease-in-out,
+                color 0.2s ease-in-out;
+  }
+  
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Body', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6, .heading {
+    font-family: 'Headings', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  /* Focus visible styles for keyboard navigation */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--focus-ring));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid hsl(var(--focus-ring));
+    outline-offset: 2px;
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --foreground: 0 0% 0%;
+      --background: 0 0% 100%;
+      --border: 0 0% 0%;
+    }
+    
+    .dark {
+      --foreground: 0 0% 100%;
+      --background: 0 0% 0%;
+      --border: 0 0% 100%;
+    }
+  }
+  
+  /* High contrast mode class */
+  .high-contrast {
+    --foreground: 0 0% 0%;
+    --background: 0 0% 100%;
+    --border: 0 0% 0%;
+    --muted-foreground: 0 0% 10%;
+  }
+  
+  .high-contrast.dark {
+    --foreground: 0 0% 100%;
+    --background: 0 0% 0%;
+    --border: 0 0% 100%;
+    --muted-foreground: 0 0% 90%;
+  }
+  
+  /* Reduced motion class */
+  .reduce-motion * {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  /* Skip to main content link for keyboard navigation */
+  .skip-to-main {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+  }
+  
+  .skip-to-main:focus {
+    top: 0;
+  }
+}
+
+/* Animated gradient for login page */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 66% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(135deg, #0D0D21 0%, #101538 30%, #132B7F 60%, #1647C4 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 30s ease-in-out infinite;
+}
+
+/* Mobile optimizations and PWA enhancements */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  /* Touch-friendly buttons */
+  button, a, input, select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better spacing for mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Stack grid items on mobile */
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Touch gesture support */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  *:hover {
+    background-color: inherit;
+  }
+  
+  /* Larger tap targets */
+  button, a, input, select {
+    padding: 12px 16px;
+  }
+  
+  /* Prevent double-tap zoom */
+  * {
+    touch-action: manipulation;
+  }
+}
+
+/* iOS safe areas */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Offline indicator */
+.offline-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #f59e0b;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+  z-index: 9999;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Pull-to-refresh indicator */
+.pull-to-refresh {
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 12px 24px;
+  border-radius: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+/* Swipe gestures */
+.swipeable {
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Print styles for executive reports */
+@media print {
+  @page {
+    margin: 1.5cm;
+    size: A4 portrait;
+  }
+  
+  @page :first {
+    margin-top: 1.5cm;
+  }
+  
+  @page :left {
+    margin-left: 1.5cm;
+  }
+  
+  @page :right {
+    margin-right: 1.5cm;
+  }
+
+  html {
+    background: white;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Remove ALL inline padding/margin from Dashboard wrapper in print */
+  body > div,
+  body > div > div {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  /* Center the tab content perfectly */
+  [role="tabpanel"] {
+    width: 180mm !important;
+    max-width: 180mm !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  /* Hide UI elements */
+  .no-print,
+  button,
+  [role="tablist"],
+  img[alt="ASDA"] {
+    display: none !important;
+  }
+
+  /* Cards with white background */
+  div[class*="card"],
+  div[class*="Card"] {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    background: white !important;
+    box-shadow: none !important;
+  }
+
+  /* Bar charts centered and properly sized */
+  .recharts-responsive-container {
+    width: 170mm !important;
+    max-width: 170mm !important;
+    margin: 0 auto !important;
+  }
+
+  .recharts-wrapper {
+    width: 170mm !important;
+    max-width: 170mm !important;
+    margin: 0 auto !important;
+  }
+
+  /* Two-column grid for pie chart and metrics - ensure proper layout */
+  .grid.lg\\:grid-cols-2 {
+    display: grid !important;
+    grid-template-columns: 45% 55% !important;
+    gap: 15px !important;
+  }
+
+  /* Pie chart - shift MUCH further to the left */
+  .recharts-pie-chart {
+    width: 100% !important;
+    overflow: visible !important;
+  }
+  
+  .recharts-pie-chart svg {
+    transform: translateX(-250px) !important;
+  }
+
+  /* Legend stays within chart area */
+  .recharts-legend-wrapper {
+    width: 100% !important;
+  }
+
+  /* Background sections */
+  div[class*="bg-"] {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    background: white !important;
+  }
+
+  /* Headings */
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  /* Grid items */
+  div[class*="grid"] > * {
+    page-break-inside: avoid;
+  }
+
+  /* Pure white backgrounds */
+  .bg-gray-50,
+  [class*="bg-gray"] {
+    background: white !important;
+  }
+}
